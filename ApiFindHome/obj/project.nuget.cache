@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "0ArBhkwrn2Arq4VjjE2Bsnf/b8TlDKPdhaP6K5ZavDm+3ZXrE74rv94dEBP/cBUb3pIwLvSxyUl5NLIYIq6/Eg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
