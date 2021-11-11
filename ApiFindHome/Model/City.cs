@@ -7,11 +7,11 @@ namespace ApiFindHome.Model
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public string Name { get; set; }
-
+        
         public ICollection<Address> Addresses { get; set; }
-
+        [Required]
         public Country Country { get; set; }
     }
 }

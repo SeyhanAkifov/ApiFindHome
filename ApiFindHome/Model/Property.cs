@@ -10,29 +10,33 @@ namespace ApiFindHome.Model
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public PropertyType Type { get; set; }
 
         public int Beds { get; set; }
 
         public int Baths { get; set; }
-
+        [Required]
         public int Area { get; set; }
-
+        [Required]
         public bool Garden { get; set; }
-
+        [Required]
         public AdFor AdFor { get; set; }
-
+        [Required]
         public int Floor { get; set; }
-
+        [Required]
+        public string Condition { get; set; }
+        [Required]
         public int YearOfConstruction { get; set; }
-
+        [Required]
         public ApplicationUser Creator { get; set; }
-
+        [Required]
         public DateTime AddedOn { get; set; }
-
+        [Required]
         public Address Address { get; set; }
-
+        [Required]
         public decimal Price { get; set; }
+
+
     }
 }

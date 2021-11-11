@@ -1,4 +1,6 @@
+using ApiFindHome.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,6 +15,9 @@ namespace ApiFindHome
     {
         public static void Main(string[] args)
         {
+            var db = new ApplicationDbContext();
+            db.Database.Migrate();
+
             CreateHostBuilder(args).Build().Run();
         }
 
