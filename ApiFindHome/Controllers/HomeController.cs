@@ -1,5 +1,6 @@
 ﻿using ApiFindHome.Data;
 using ApiFindHome.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace ApiFindHome.Controllers
 
         [EnableCors]
         [HttpGet]
+        [Authorize]
         public object Get()
         {
             var list = db.Properties

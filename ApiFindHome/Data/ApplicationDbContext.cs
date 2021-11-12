@@ -1,4 +1,5 @@
 ﻿using ApiFindHome.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApiFindHome.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
@@ -33,9 +34,10 @@ namespace ApiFindHome.Data
 
         public DbSet<UserType> UserTypes { get; set; }
 
-        public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<AdFor> AdFors { get; set; }
+        
 
 
 
@@ -43,7 +45,7 @@ namespace ApiFindHome.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-11LDN42\\SQLEXPRESS;Database=FindHome;Integrated Security=true;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-11LDN42\\SQLEXPRESS;Database=FindHome;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
