@@ -34,23 +34,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address.City)
                 .Include(x => x.Address.City.Country)
                 .Include(x => x.Type).ToList();
-
-            var resultList = list.Select(x => new HomePagePropertyDto
-            {
-                Id = x.Id,
-                PropertyType = x.Type.Name,
-                Beds = x.Beds,
-                Baths = x.Baths,
-                Area = x.Area,
-                Price = x.Price,
-                PostCode = x.Address.PostCode,
-                CityName = x.Address.City.Name,
-                StreetName = x.Address.StreetName,
-                StreetNumber = x.Address.StreetNumber,
-                YearsAgo = (DateTime.UtcNow.Year - x.AddedOn.Year).ToString()
-
-            }).ToList();
-
+            
             var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
 
             return result;
@@ -101,13 +85,39 @@ namespace ApiFindHome.Controllers
         [HttpPost]
         public object Post()
         {
+            var typeName = "House";
+            var adfor = "Sale";
+            var cityName = "Berlin";
+            var countryName = "Germany";
+
+            var type = db.PropertyTypes.FirstOrDefault(x => x.Name == typeName);
+            var adFor = db.AdFors.FirstOrDefault(x => x.Name == adfor);
+            var city = db.Cities.FirstOrDefault(x => x.Name == cityName);
+            var country = db.Countries.FirstOrDefault(x => x.Name == countryName);
+
+            if (city == null)
+            {
+                db.Cities.Add(new City { Name = cityName , Country = new Country { Name = countryName} });
+                db.SaveChanges();
+                city = db.Cities.FirstOrDefault(x => x.Name == cityName);
+            }
+
+            if (country == null)
+            {
+                db.Countries.Add(new Country { Name = countryName });
+                db.SaveChanges();
+                country = db.Countries.FirstOrDefault(x => x.Name == countryName);
+            }
+
+            city.Country = country;
+
             var property = new Property
             {
-                Type = new PropertyType { Name = "House" },
-                Price = 30000,
-                AdFor = new AdFor { Name = "Sale" },
+                Type = type,
+                Price = 300000,
+                AdFor = adFor,
                 Condition = "Renovated House",
-                Address = new Address { City = new City { Name = "Munich", Country = new Country { Name = "Germany" } }, PostCode = "85664", StreetName = "Kanzleiweg", StreetNumber = "10" },
+                Address = new Address { City = city , PostCode = "85664", StreetName = "Kanzleiweg", StreetNumber = "10" },
                 Beds = 3,
                 Baths = 2,
                 Area = 150,
@@ -122,7 +132,7 @@ namespace ApiFindHome.Controllers
             db.Properties.Add(property);
             db.SaveChanges();
 
-            return property;
+            return RedirectToAction("Get");
 
 
         }

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Kabalsky\OneDrive - Software University (SoftUni)\Desktop\FindHomeApi\ApiFindHome\ApiFindHome\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-11-13T12:34:35.1865163Z;True|2021-11-13T12:20:05.0403160+01:00;True|2021-11-13T12:14:27.5010944+01:00;True|2021-11-13T11:34:10.8012895+01:00;True|2021-11-13T11:29:04.1218056+01:00;</History>
+  </PropertyGroup>
+</Project>

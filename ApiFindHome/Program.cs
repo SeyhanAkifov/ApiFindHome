@@ -16,7 +16,7 @@ namespace ApiFindHome
         public static void Main(string[] args)
         {
             var db = new ApplicationDbContext();
-            db.Database.Migrate();
+              db.Database.Migrate();
 
             CreateHostBuilder(args).Build().Run();
         }

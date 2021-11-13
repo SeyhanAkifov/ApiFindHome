@@ -45,7 +45,7 @@ namespace ApiFindHome.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-11LDN42\\SQLEXPRESS;Database=FindHome;Integrated Security=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Server=mssql6.asphostbg.net,14330;Database=seyhanak_apifindhome;Uid=seyhanak_admin_seyhan;Password=DuduDudu157");
             }
         }
 
