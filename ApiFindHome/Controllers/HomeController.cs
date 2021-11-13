@@ -1,13 +1,13 @@
 ﻿using ApiFindHome.Data;
+using ApiFindHome.Dto;
 using ApiFindHome.Model;
-using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiFindHome.Controllers
 {
@@ -15,18 +15,45 @@ namespace ApiFindHome.Controllers
     [Route("api/[controller]/[action]")]
     public class HomeController : ControllerBase
     {
+        private readonly IMapper mapper;
+        public HomeController(IMapper mapper)
+        {
+            this.mapper = mapper;
+
+        }
+
         ApplicationDbContext db = new ApplicationDbContext();
 
         [EnableCors]
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public object Get()
         {
-            var list = db.Properties
+            ICollection<Property> list = db.Properties
                 .Include(x => x.Address)
-                .Include(x => x.Type).ToArray();
+                .Include(x => x.Address.City)
+                .Include(x => x.Address.City.Country)
+                .Include(x => x.Type).ToList();
 
-            return list;
+            var resultList = list.Select(x => new HomePagePropertyDto
+            {
+                Id = x.Id,
+                PropertyType = x.Type.Name,
+                Beds = x.Beds,
+                Baths = x.Baths,
+                Area = x.Area,
+                Price = x.Price,
+                PostCode = x.Address.PostCode,
+                CityName = x.Address.City.Name,
+                StreetName = x.Address.StreetName,
+                StreetNumber = x.Address.StreetNumber,
+                YearsAgo = (DateTime.UtcNow.Year - x.AddedOn.Year).ToString()
+
+            }).ToList();
+
+            var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
+
+            return result;
         }
 
 
@@ -80,7 +107,7 @@ namespace ApiFindHome.Controllers
                 Price = 30000,
                 AdFor = new AdFor { Name = "Sale" },
                 Condition = "Renovated House",
-                Address = new Address { City = new City { Name = "Munich" }, PostCode = "85664", StreetName = "Kanzleiweg", StreetNumber = "10" },
+                Address = new Address { City = new City { Name = "Munich", Country = new Country { Name = "Germany" } }, PostCode = "85664", StreetName = "Kanzleiweg", StreetNumber = "10" },
                 Beds = 3,
                 Baths = 2,
                 Area = 150,
