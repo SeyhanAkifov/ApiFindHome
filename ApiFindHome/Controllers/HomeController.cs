@@ -62,7 +62,7 @@ namespace ApiFindHome.Controllers
         }
 
         [HttpGet]
-        public object GetTypes(int id)
+        public object GetTypes()
         {
 
             var types = db.PropertyTypes.ToArray();

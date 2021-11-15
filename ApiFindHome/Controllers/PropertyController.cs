@@ -1,4 +1,7 @@
 ﻿using ApiFindHome.Data;
+using ApiFindHome.Dto;
+using ApiFindHome.Model;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,6 +16,12 @@ namespace ApiFindHome.Controllers
     public class PropertyController : ControllerBase
     {
 
+        private readonly IMapper mapper;
+        public PropertyController(IMapper mapper)
+        {
+            this.mapper = mapper;
+
+        }
         ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
@@ -24,6 +33,28 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Type).OrderBy(x => x.Price).ToArray();
 
             return property;
+        }
+
+        [HttpGet]
+        public object Search(string type, string location, int min, int max)
+        {
+
+            var list = db.Properties
+                .Include(x => x.Address)
+                .Include(x => x.Address.City)
+                .Include(x => x.Address.City.Country)
+                .Include(x => x.Type)
+                .Include(x => x.AdFor)
+                .AsEnumerable()
+                .Where(x =>  (type != null ? x.Type.Name == type : x != null)
+                         && (loca != null ? x.Address.City.Name == loca : x != null)
+                         && (min != 0 ? x.Price >= min : x != null)
+                         && (max != 0 ? x.Price <= max : x != null))
+                .ToList();
+
+            var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
+
+            return result;
         }
 
         [HttpGet]
