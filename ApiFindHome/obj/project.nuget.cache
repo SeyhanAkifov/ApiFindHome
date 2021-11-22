@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xh5viglJ9Tcixw/yGkWXEmw2h2usAjxMbNbfGO4BxAMZ5hUJsQOtr+JzskNlp944zQnbOwS4ZovuLdWJGneIuw==",
+  "dgSpecHash": "mIqCdFuz37AJLoMzgP//TAkmk9l29aFTSWsBoLDbFJ4E8nDqseqJdAdiWKvH9NY1g90+gvuUL2I1opahp9VJ7g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
+  "projectFilePath": "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kabalsky\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Kabalsky\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

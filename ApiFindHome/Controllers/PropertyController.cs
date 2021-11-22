@@ -47,7 +47,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.AdFor)
                 .AsEnumerable()
                 .Where(x =>  (type != null ? x.Type.Name == type : x != null)
-                         && (loca != null ? x.Address.City.Name == loca : x != null)
+                         && (location != null ? x.Address.City.Name == location : x != null)
                          && (min != 0 ? x.Price >= min : x != null)
                          && (max != 0 ? x.Price <= max : x != null))
                 .ToList();
@@ -110,6 +110,22 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Type).Where(x => x.Creator.Email.ToLower() == user.ToLower()).ToArray();
 
             return property;
+        }
+
+        [HttpGet]
+        public object GetPropertyWithCityName(string cityName)
+        {
+
+            ICollection<Property> list = db.Properties
+                 .Include(x => x.Address)
+                 .Include(x => x.Address.City)
+                 .Include(x => x.Address.City.Country)
+                 .Include(x => x.Type)
+                 .Where(x => x.Address.City.Name == cityName).ToList();
+
+            var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
+
+            return result;
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj": {}
+    "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj": {
+    "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
+        "projectUniqueName": "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
         "projectName": "ApiFindHome",
-        "projectPath": "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
+        "projectPath": "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
         "packagesPath": "C:\\Users\\Kabalsky\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kabalsky\\OneDrive - Software University (SoftUni)\\Desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\obj\\",
+        "outputPath": "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -92,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

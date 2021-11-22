@@ -40,6 +40,30 @@ namespace ApiFindHome.Controllers
             return result;
         }
 
+        [HttpGet]
+        public object GetCitiesWitProperties()
+        {
+            ICollection<Property> list = db.Properties
+                .Include(x => x.Address)
+                .Include(x => x.Address.City)
+                .Include(x => x.Address.City.Country)
+                .Include(x => x.Type).ToList();
+
+            var cityList = db.Cities.ToList();
+
+            var result = new
+            {
+                Cities = cityList.Select(x => new
+                {
+                    City = x.Name,
+                    Properties = list.Where(y => y.Address.City.Name == x.Name).Count()
+                }).OrderByDescending(x => x.Properties).Take(4)
+            };
+            
+
+            return result;
+
+        }
 
         [HttpGet]
         public object GetWithId(int id)
