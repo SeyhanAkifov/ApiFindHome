@@ -123,11 +123,9 @@ G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.cspr
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.MvcApplicationPartsAssemblyInfo.cs
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.MvcApplicationPartsAssemblyInfo.cache
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\staticwebassets\ApiFindHome.StaticWebAssets.Manifest.cache
-G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\staticwebassets\ApiFindHome.StaticWebAssets.xml
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\scopedcss\bundle\ApiFindHome.styles.css
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.RazorTargetAssemblyInfo.cache
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.dll
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ref\ApiFindHome.dll
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.pdb
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.genruntimeconfig.cache
-G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Debug\net5.0\ApiFindHome.csproj.CopyComplete

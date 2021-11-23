@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mIqCdFuz37AJLoMzgP//TAkmk9l29aFTSWsBoLDbFJ4E8nDqseqJdAdiWKvH9NY1g90+gvuUL2I1opahp9VJ7g==",
+  "dgSpecHash": "PgK5mN1N0EEcmumaEONbtOpQrOBVqbHvJs5GQ/53B1/0c8rV0WpYMMIJPF3gJAPd2USyOfD6hgmxYW6BblLgWQ==",
   "success": true,
   "projectFilePath": "G:\\desktop\\FindHomeApi\\ApiFindHome\\ApiFindHome\\ApiFindHome.csproj",
   "expectedPackageFiles": [
@@ -108,7 +108,8 @@
     "C:\\Users\\Kabalsky\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Kabalsky\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Kabalsky\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Kabalsky\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Kabalsky\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.11\\microsoft.netcore.app.host.win-x64.5.0.11.nupkg.sha512"
   ],
   "logs": []
 }

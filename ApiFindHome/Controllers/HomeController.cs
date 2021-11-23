@@ -33,7 +33,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address)
                 .Include(x => x.Address.City)
                 .Include(x => x.Address.City.Country)
-                .Include(x => x.Type).ToList();
+                .Include(x => x.Type).Take(6).ToList();
             
             var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
 
@@ -49,17 +49,21 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address.City.Country)
                 .Include(x => x.Type).ToList();
 
+            
             var cityList = db.Cities.ToList();
 
-            var result = new
+            var result = cityList.Select(x => new CitySearchDto
             {
-                Cities = cityList.Select(x => new
-                {
-                    City = x.Name,
-                    Properties = list.Where(y => y.Address.City.Name == x.Name).Count()
-                }).OrderByDescending(x => x.Properties).Take(4)
-            };
-            
+                City = x.Name,
+                Properties = list.Where(y => y.Address.City.Name == x.Name).Count(),
+                Size =  8 
+                
+            }).OrderByDescending(x => x.Properties).Take(4).ToList();
+
+            result.First().Size = 4;
+            result.Last().Size = 4;
+
+           
 
             return result;
 

@@ -27,6 +27,8 @@ namespace ApiFindHome.Model
         [Required]
         public string Condition { get; set; }
         [Required]
+        public string Description { get; set; }
+        [Required]
         public int YearOfConstruction { get; set; }
         [Required]
         public ApplicationUser Creator { get; set; }
@@ -36,6 +38,8 @@ namespace ApiFindHome.Model
         public Address Address { get; set; }
         [Required]
         public decimal Price { get; set; }
+        [Required]
+        public Feature Feature { get; set; }
 
 
     }
