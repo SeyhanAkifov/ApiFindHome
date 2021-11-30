@@ -2,6 +2,7 @@
 using ApiFindHome.Dto;
 using ApiFindHome.Model;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -101,6 +102,7 @@ namespace ApiFindHome.Controllers
             return property;
         }
 
+        [Authorize]
         [HttpGet]
         public object GetMy(string user)
         {

@@ -2,6 +2,7 @@
 using ApiFindHome.Dto;
 using ApiFindHome.Model;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +27,12 @@ namespace ApiFindHome.Controllers
 
         [EnableCors]
         [HttpGet]
-        //[Authorize]
+        
         public object Get()
         {
             ICollection<Property> list = db.Properties
+                .Include(x => x.AdFor)
+                .Include(x => x.Feature)
                 .Include(x => x.Address)
                 .Include(x => x.Address.City)
                 .Include(x => x.Address.City.Country)
@@ -40,6 +43,7 @@ namespace ApiFindHome.Controllers
             return result;
         }
 
+        
         [HttpGet]
         public object GetCitiesWitProperties()
         {
@@ -54,6 +58,7 @@ namespace ApiFindHome.Controllers
 
             var result = cityList.Select(x => new CitySearchDto
             {
+                Id = x.Id,
                 City = x.Name,
                 Properties = list.Where(y => y.Address.City.Name == x.Name).Count(),
                 Size =  8 
@@ -69,15 +74,22 @@ namespace ApiFindHome.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
         public object GetWithId(int id)
         {
 
-            var property = db.Properties
+            Property list = db.Properties
+                .Include(x => x.AdFor)
+                .Include(x => x.Feature)
                 .Include(x => x.Address)
+                .Include(x => x.Address.City)
+                .Include(x => x.Address.City.Country)
                 .Include(x => x.Type).FirstOrDefault(x => x.Id == id);
 
-            return property;
+            var result = mapper.Map<Property, PropertyDetailsDto>(list);
+
+            return result;
         }
 
         [HttpGet]
@@ -98,6 +110,7 @@ namespace ApiFindHome.Controllers
             return types;
         }
 
+        [Authorize]
         [HttpDelete]
         public object DeleteWithId(int id)
         {
@@ -110,6 +123,7 @@ namespace ApiFindHome.Controllers
             return property;
         }
 
+        [Authorize]
         [HttpPost]
         public object Post()
         {
