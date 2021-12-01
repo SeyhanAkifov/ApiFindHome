@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiFindHome.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +28,9 @@ namespace ApiFindHome.Dto
         public string Condition { get; set; }
         
         public string Description { get; set; }
-        
+
+        public string Title { get; set; }
+
         public int YearOfConstruction { get; set; }
         
         public string Creator { get; set; }
@@ -48,6 +51,6 @@ namespace ApiFindHome.Dto
 
         public string YearsAgo { get; set; }
 
-        public List<string> Feature { get; set; }
+        public Feature Feature { get; set; }
     }
 }

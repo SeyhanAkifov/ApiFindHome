@@ -125,12 +125,12 @@ namespace ApiFindHome.Controllers
 
         [Authorize]
         [HttpPost]
-        public object Post()
+        public object Post([FromBody] PropertyInputModelDto model)
         {
-            var typeName = "House";
-            var adfor = "Sale";
-            var cityName = "Berlin";
-            var countryName = "Germany";
+            var typeName = model.TypeName;
+            var adfor = model.AdFor;
+            var cityName = model.CityName;
+            var countryName = model.CountryName;
 
             var type = db.PropertyTypes.FirstOrDefault(x => x.Name == typeName);
             var adFor = db.AdFors.FirstOrDefault(x => x.Name == adfor);
@@ -153,21 +153,58 @@ namespace ApiFindHome.Controllers
 
             city.Country = country;
 
+            var feature = new Feature
+            {
+                AirConditioning = model.Feature.AirConditioning,
+
+                Barbeque = model.Feature.Barbeque,
+
+                Dryer = model.Feature.Dryer,
+
+                Gym = model.Feature.Gym,
+
+                Laundry = model.Feature.Laundry,
+
+                Lawn = model.Feature.Lawn,
+
+                Kitchen = model.Feature.Kitchen,
+
+                OutdoorShower = model.Feature.OutdoorShower,
+
+                Refrigerator = model.Feature.Refrigerator,
+
+                Sauna = model.Feature.Sauna,
+
+                SwimmingPool = model.Feature.SwimmingPool,
+
+                TvCable = model.Feature.TvCable,
+
+                Washer = model.Feature.Washer,
+
+                Wifi = model.Feature.Wifi,
+
+                WindowCoverings = model.Feature.WindowCoverings
+            };
+
             var property = new Property
             {
                 Type = type,
-                Price = 300000,
+                Price = model.Price,
                 AdFor = adFor,
-                Condition = "Renovated House",
-                Address = new Address { City = city , PostCode = "85664", StreetName = "Kanzleiweg", StreetNumber = "10" },
-                Beds = 3,
-                Baths = 2,
-                Area = 150,
-                Floor = 1,
-                Garden = true,
+                Condition = model.Condition,
+                Address = new Address { City = city, PostCode = model.PostCode, StreetName = model.Address.Split(" ")[0], StreetNumber = model.Address.Split(" ")[1] },
+                Beds = model.Beds,
+                Baths = model.Baths,
+                Area = model.Area,
+                Floor = model.Floor,
+                Garden = model.Garden,
+                
                 //Creator = this.User,
                 AddedOn = DateTime.UtcNow,
-                YearOfConstruction = 1951,
+                YearOfConstruction = model.YearOfConstruction,
+                Title = model.Title,
+                Description = model.Description,
+                Feature = feature,
 
             };
 

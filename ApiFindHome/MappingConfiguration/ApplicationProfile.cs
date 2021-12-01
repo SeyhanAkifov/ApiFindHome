@@ -26,8 +26,8 @@ namespace ApiFindHome.MappingConfiguration
                .ForMember(x => x.PostCode, y => y.MapFrom(s => s.Address.PostCode))
                .ForMember(x => x.Type, y => y.MapFrom(s => s.Type.Name))
                .ForMember(x => x.AdFor, y => y.MapFrom(s => s.AdFor.Name))
-               .ForMember(x => x.YearsAgo, y => y.MapFrom(s => (DateTime.UtcNow - s.AddedOn)))
-               .ForMember(x => x.Feature, y => y.MapFrom(s => (s.Feature)));
+               .ForMember(x => x.YearsAgo, y => y.MapFrom(s => (DateTime.UtcNow - s.AddedOn)));
+               
 
             //this.CreateMap<NewsOutputDto, NewsViewModel>();
 

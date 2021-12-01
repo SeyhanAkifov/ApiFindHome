@@ -12,8 +12,10 @@ namespace ApiFindHome.Model
         public int Id { get; set; }
         [Required]
         public PropertyType Type { get; set; }
-
+        [Required]
         public int Beds { get; set; }
+        [Required]
+        public string Title { get; set; }
 
         public int Baths { get; set; }
         [Required]
