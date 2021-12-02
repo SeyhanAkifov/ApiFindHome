@@ -109,7 +109,7 @@ namespace ApiFindHome.Controllers
 
             var property = db.Properties
                 .Include(x => x.Address)
-                .Include(x => x.Type).Where(x => x.Creator.Email.ToLower() == user.ToLower()).ToArray();
+                .Include(x => x.Type).Where(x => x.Creator.ToLower() == user.ToLower()).ToArray();
 
             return property;
         }

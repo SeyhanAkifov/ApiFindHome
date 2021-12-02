@@ -9,6 +9,7 @@ namespace ApiFindHome.Dto
     public class PropertyInputModelDto
     {
         public string TypeName { get; set; }
+        public string Creator { get; set; }
         public string AdFor { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

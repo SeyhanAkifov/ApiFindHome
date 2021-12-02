@@ -33,7 +33,7 @@ namespace ApiFindHome.Model
         [Required]
         public int YearOfConstruction { get; set; }
         [Required]
-        public ApplicationUser Creator { get; set; }
+        public string Creator { get; set; }
         [Required]
         public DateTime AddedOn { get; set; }
         [Required]

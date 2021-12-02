@@ -198,8 +198,7 @@ namespace ApiFindHome.Controllers
                 Area = model.Area,
                 Floor = model.Floor,
                 Garden = model.Garden,
-                
-                //Creator = this.User,
+                Creator = model.Creator,
                 AddedOn = DateTime.UtcNow,
                 YearOfConstruction = model.YearOfConstruction,
                 Title = model.Title,
