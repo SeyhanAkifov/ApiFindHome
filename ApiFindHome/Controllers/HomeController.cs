@@ -74,12 +74,16 @@ namespace ApiFindHome.Controllers
 
         }
 
-        [Authorize]
+        
         [HttpGet]
         public object GetWithId(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Id must be a positive number!" });
+            }
 
-            Property list = db.Properties
+            Property property = db.Properties
                 .Include(x => x.AdFor)
                 .Include(x => x.Feature)
                 .Include(x => x.Address)
@@ -87,7 +91,12 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address.City.Country)
                 .Include(x => x.Type).FirstOrDefault(x => x.Id == id);
 
-            var result = mapper.Map<Property, PropertyDetailsDto>(list);
+            if (property == null)
+            {
+                return NotFound(new Response { Status = "Not Found", Message = "Not found property with this id!" });
+            }
+
+            var result = mapper.Map<Property, PropertyDetailsDto>(property);
 
             return result;
         }
@@ -95,8 +104,17 @@ namespace ApiFindHome.Controllers
         [HttpGet]
         public object GetTypeWithId(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Id must be a positive number!" });
+            }
 
             var type = db.PropertyTypes.FirstOrDefault(x => x.Id == id);
+
+            if (type == null)
+            {
+                return NotFound(new Response { Status = "Not Found", Message = "Not found type with this id!" });
+            }
 
             return type;
         }
@@ -114,19 +132,33 @@ namespace ApiFindHome.Controllers
         [HttpDelete]
         public object DeleteWithId(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Id must be a positive number!" });
+            }
 
             var property = db.Properties.FirstOrDefault(x => x.Id == id);
+
+            if (property == null)
+            {
+                return NotFound(new Response { Status = "Not Found", Message = "Not found property with this id!" });
+            }
 
             db.Properties.Remove(property);
             db.SaveChanges();
 
-            return property;
+            return Ok(new Response { Status = "Success", Message = "Property deleted successfully!" });
         }
 
         [Authorize]
         [HttpPost]
         public object Post([FromBody] PropertyInputModelDto model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Check your inputs" });
+            }
+
             var typeName = model.TypeName;
             var adfor = model.AdFor;
             var cityName = model.CityName;
@@ -210,7 +242,123 @@ namespace ApiFindHome.Controllers
             db.Properties.Add(property);
             db.SaveChanges();
 
-            return RedirectToAction("Get");
+            return Ok(new Response { Status = "Success", Message = "Property updated successfully!" });
+
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public object Edit([FromBody] PropertyInputModelDto model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Check your inputs" });
+            }
+
+
+            var id = model.Id;
+
+            if (id <= 0)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Id must be a positive number!" });
+            }
+
+            var prop = db.Properties.Find(id);
+
+            if (prop == null)
+            {
+                return NotFound(new Response { Status = "Not Found", Message = "Not found property with this id!" });
+            }
+
+            var typeName = model.TypeName;
+            var adfor = model.AdFor;
+            var cityName = model.CityName;
+            var countryName = model.CountryName;
+
+            var type = db.PropertyTypes.FirstOrDefault(x => x.Name == typeName);
+            var adFor = db.AdFors.FirstOrDefault(x => x.Name == adfor);
+            var city = db.Cities.FirstOrDefault(x => x.Name == cityName);
+            var country = db.Countries.FirstOrDefault(x => x.Name == countryName);
+
+            if (city == null)
+            {
+                db.Cities.Add(new City { Name = cityName, Country = new Country { Name = countryName } });
+                db.SaveChanges();
+                city = db.Cities.FirstOrDefault(x => x.Name == cityName);
+            }
+
+            if (country == null)
+            {
+                db.Countries.Add(new Country { Name = countryName });
+                db.SaveChanges();
+                country = db.Countries.FirstOrDefault(x => x.Name == countryName);
+            }
+
+            city.Country = country;
+
+            var feature = new Feature
+            {
+                AirConditioning = model.Feature.AirConditioning,
+
+                Barbeque = model.Feature.Barbeque,
+
+                Dryer = model.Feature.Dryer,
+
+                Gym = model.Feature.Gym,
+
+                Laundry = model.Feature.Laundry,
+
+                Lawn = model.Feature.Lawn,
+
+                Kitchen = model.Feature.Kitchen,
+
+                OutdoorShower = model.Feature.OutdoorShower,
+
+                Refrigerator = model.Feature.Refrigerator,
+
+                Sauna = model.Feature.Sauna,
+
+                SwimmingPool = model.Feature.SwimmingPool,
+
+                TvCable = model.Feature.TvCable,
+
+                Washer = model.Feature.Washer,
+
+                Wifi = model.Feature.Wifi,
+
+                WindowCoverings = model.Feature.WindowCoverings
+            };
+
+            prop.Type = type;
+            prop.Price = model.Price;
+            prop.AdFor = adFor;
+            prop.Condition = model.Condition;
+            prop.Address = new Address { City = city, PostCode = model.PostCode, StreetName = model.Address.Split(" ")[0], StreetNumber = model.Address.Split(" ")[1] };
+            prop.Beds = model.Beds;
+            prop.Baths = model.Baths;
+            prop.Area = model.Area;
+            prop.Floor = model.Floor;
+            prop.Garden = model.Garden;
+            prop.Creator = model.Creator;
+            prop.AddedOn = DateTime.UtcNow;
+            prop.YearOfConstruction = model.YearOfConstruction;
+            prop.Title = model.Title;
+            prop.Description = model.Description;
+            prop.Feature = feature;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch
+            {
+                
+            }
+            
+
+            return Ok(new Response { Status = "Success", Message = "Property created successfully!" });
 
 
         }
