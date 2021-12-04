@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiFindHome.Model
@@ -15,5 +16,7 @@ namespace ApiFindHome.Model
         public Address Address { get; set; }
 
         public UserType UserType { get; set; }
+
+        
     }
 }

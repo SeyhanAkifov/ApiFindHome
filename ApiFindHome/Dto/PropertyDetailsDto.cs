@@ -8,41 +8,41 @@ namespace ApiFindHome.Dto
 {
     public class PropertyDetailsDto
     {
-        
+
         public int Id { get; set; }
-        
+
         public string Type { get; set; }
 
         public int Beds { get; set; }
 
         public int Baths { get; set; }
-        
+
         public int Area { get; set; }
-        
+
         public bool Garden { get; set; }
-        
+
         public string AdFor { get; set; }
-        
+
         public int Floor { get; set; }
-        
+
         public string Condition { get; set; }
-        
+
         public string Description { get; set; }
 
         public string Title { get; set; }
 
         public int YearOfConstruction { get; set; }
-        
+
         public string Creator { get; set; }
-        
+
         public DateTime AddedOn { get; set; }
 
         public string PostCode { get; set; }
-        
+
         public string StreetName { get; set; }
-        
+
         public string StreetNumber { get; set; }
-       
+
         public string City { get; set; }
 
         public string Country { get; set; }
@@ -52,5 +52,7 @@ namespace ApiFindHome.Dto
         public string YearsAgo { get; set; }
 
         public Feature Feature { get; set; }
+
+        public List<string> Likes { get; set; }
     }
 }

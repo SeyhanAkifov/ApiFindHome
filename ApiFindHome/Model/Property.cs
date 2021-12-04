@@ -43,6 +43,9 @@ namespace ApiFindHome.Model
         [Required]
         public Feature Feature { get; set; }
 
+        public ICollection<UserLike> UserLikes { get; set; }
+
+       
 
     }
 }

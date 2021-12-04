@@ -37,7 +37,9 @@ namespace ApiFindHome.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<AdFor> AdFors { get; set; }
-        
+
+        public DbSet<UserLike> UserLikes { get; set; }
+
 
 
 

@@ -4,11 +4,13 @@ using ApiFindHome.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ApiFindHome.Controllers
 {
@@ -17,9 +19,11 @@ namespace ApiFindHome.Controllers
     public class HomeController : ControllerBase
     {
         private readonly IMapper mapper;
-        public HomeController(IMapper mapper)
+        private readonly UserManager<ApplicationUser> userManager;
+        public HomeController(UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             this.mapper = mapper;
+            this.userManager = userManager;
 
         }
 
@@ -89,6 +93,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address)
                 .Include(x => x.Address.City)
                 .Include(x => x.Address.City.Country)
+                .Include(x => x.UserLikes)
                 .Include(x => x.Type).FirstOrDefault(x => x.Id == id);
 
             if (property == null)
@@ -361,6 +366,48 @@ namespace ApiFindHome.Controllers
             return Ok(new Response { Status = "Success", Message = "Property created successfully!" });
 
 
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UserLike([FromBody] Like model)
+        {   
+            var like = new UserLike
+            {
+                UserId = model.Username,
+                PropertyId = model.PropertyId
+            };
+
+            db.UserLikes.Add(like);
+            
+
+            db.SaveChanges();
+
+            return Ok(new Response { Status = "Success", Message = "Property liked successfully!" });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public object UserUnlike(int id)
+        {
+            var like = db.UserLikes.Find(id);
+
+            db.UserLikes.Remove(like);
+
+            db.SaveChanges();
+
+            return Ok(new Response { Status = "Success", Message = "Property unliked successfully!" });
+        }
+
+
+        [HttpGet]
+        public async Task<object> GetMyLikes(string username)
+        {
+           
+            
+            var properties = db.Properties.Where(z => z.UserLikes.Any(x => x.UserId == username)).ToList();
+            
+            return properties;
         }
     }
 }
