@@ -21,6 +21,8 @@ namespace ApiFindHome.Dto
 
         public string YearsAgo { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public string PostCode { get; set; }
 
         public string CityName { get; set; }

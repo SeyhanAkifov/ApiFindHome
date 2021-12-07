@@ -18,6 +18,7 @@ namespace ApiFindHome.Dto
         public int Floor { get; set; }
         public int Baths { get; set; }
         public string Condition { get; set; }
+        public string ImageUrl { get; set; }
         public int YearOfConstruction { get; set; }
         public int Area { get; set; }
         public string CityName { get; set; }

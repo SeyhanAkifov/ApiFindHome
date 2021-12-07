@@ -32,7 +32,7 @@ namespace ApiFindHome.Controllers
         [EnableCors]
         [HttpGet]
         
-        public object Get()
+        public object Get(int page)
         {
             ICollection<Property> list = db.Properties
                 .Include(x => x.AdFor)
@@ -40,7 +40,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address)
                 .Include(x => x.Address.City)
                 .Include(x => x.Address.City.Country)
-                .Include(x => x.Type).Take(6).ToList();
+                .Include(x => x.Type).OrderByDescending(x => x.AddedOn).Skip(page).Take(6).ToList();
             
             var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
 
@@ -133,8 +133,9 @@ namespace ApiFindHome.Controllers
             return types;
         }
 
+       
         [Authorize]
-        [HttpDelete]
+        [HttpGet]
         public object DeleteWithId(int id)
         {
             if (id <= 0)
@@ -240,6 +241,7 @@ namespace ApiFindHome.Controllers
                 YearOfConstruction = model.YearOfConstruction,
                 Title = model.Title,
                 Description = model.Description,
+                ImageUrl = model.ImageUrl,
                 Feature = feature,
 
             };
@@ -352,6 +354,7 @@ namespace ApiFindHome.Controllers
             prop.Title = model.Title;
             prop.Description = model.Description;
             prop.Feature = feature;
+            prop.ImageUrl = model.ImageUrl;
 
             try
             {
@@ -381,16 +384,16 @@ namespace ApiFindHome.Controllers
             db.UserLikes.Add(like);
             
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return Ok(new Response { Status = "Success", Message = "Property liked successfully!" });
         }
 
         [Authorize]
-        [HttpGet]
-        public object UserUnlike(int id)
+        [HttpPost]
+        public object UserUnlike([FromBody] Like model)
         {
-            var like = db.UserLikes.Find(id);
+            var like = db.UserLikes.FirstOrDefault(x => x.UserId == model.Username && x.PropertyId == model.PropertyId);
 
             db.UserLikes.Remove(like);
 
@@ -399,15 +402,23 @@ namespace ApiFindHome.Controllers
             return Ok(new Response { Status = "Success", Message = "Property unliked successfully!" });
         }
 
-
+        [Authorize]
         [HttpGet]
-        public async Task<object> GetMyLikes(string username)
+        public object GetMyLikes(string username)
         {
            
             
-            var properties = db.Properties.Where(z => z.UserLikes.Any(x => x.UserId == username)).ToList();
-            
-            return properties;
+            var list = db.Properties
+                 .Include(x => x.Address)
+                 .Include(x => x.Address.City)
+                 .Include(x => x.Address.City.Country)
+                 .Include(x => x.Type)
+                .Where(z => z.UserLikes.Any(x => x.UserId == username)).ToList();
+
+            var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
+
+
+            return result;
         }
     }
 }

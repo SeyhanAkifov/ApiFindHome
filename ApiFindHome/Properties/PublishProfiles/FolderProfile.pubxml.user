@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\bin\Release\net5.0\publish\</_PublishTargetUrl>
-    <History>True|2021-12-04T09:00:24.8577447Z;True|2021-11-13T13:34:35.1865163+01:00;True|2021-11-13T12:20:05.0403160+01:00;True|2021-11-13T12:14:27.5010944+01:00;True|2021-11-13T11:34:10.8012895+01:00;True|2021-11-13T11:29:04.1218056+01:00;</History>
+    <History>True|2021-12-07T19:29:46.4560820Z;True|2021-12-07T16:27:20.0511085+01:00;True|2021-12-06T17:14:15.4188757+01:00;True|2021-12-04T15:04:20.2715990+01:00;True|2021-12-04T14:57:12.6609668+01:00;True|2021-12-04T14:53:00.1317861+01:00;True|2021-12-04T10:00:24.8577447+01:00;True|2021-11-13T13:34:35.1865163+01:00;True|2021-11-13T12:20:05.0403160+01:00;True|2021-11-13T12:14:27.5010944+01:00;True|2021-11-13T11:34:10.8012895+01:00;True|2021-11-13T11:29:04.1218056+01:00;</History>
   </PropertyGroup>
 </Project>

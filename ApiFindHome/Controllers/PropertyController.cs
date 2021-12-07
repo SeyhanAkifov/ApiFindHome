@@ -48,7 +48,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.AdFor)
                 .AsEnumerable()
                 .Where(x =>  (type != null ? x.Type.Name == type : x != null)
-                         && (location != null ? x.Address.City.Name == location : x != null)
+                         && (location != null ? x.Address.City.Name.ToLower() == location.ToLower() : x != null)
                          && (min != 0 ? x.Price >= min : x != null)
                          && (max != 0 ? x.Price <= max : x != null))
                 .ToList();
@@ -107,11 +107,16 @@ namespace ApiFindHome.Controllers
         public object GetMy(string user)
         {
 
-            var property = db.Properties
+            var list = db.Properties
                 .Include(x => x.Address)
+                .Include(x => x.Address.City)
+                 .Include(x => x.Address.City.Country)
+                 .Include(x => x.Type)
                 .Include(x => x.Type).Where(x => x.Creator.ToLower() == user.ToLower()).ToArray();
 
-            return property;
+            var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
+
+            return result;
         }
 
         [HttpGet]
