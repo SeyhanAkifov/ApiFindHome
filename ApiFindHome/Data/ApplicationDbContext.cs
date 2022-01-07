@@ -40,6 +40,9 @@ namespace ApiFindHome.Data
 
         public DbSet<UserLike> UserLikes { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
+
 
 
 

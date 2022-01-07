@@ -135,6 +135,46 @@ namespace ApiFindHome.Controllers
             return result;
         }
 
+        [HttpGet]
+        public object GetRecipientMessages(string recipient)
+        {
+            var messages = this.db.Messages.Where(x => x.Recipient == this.User.Identity.Name).ToList();
+
+            return messages;
+        }
+
+        [HttpGet]
+        public object GetPropertyMessages(int propertyId)
+        {
+            var messages = this.db.Messages.Where(x => x.PropertyId == propertyId).ToList();
+
+            return messages;
+        }
+
+        [HttpPost]
+        public object SendMessage([FromBody] MessageDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Response { Status = "Failed", Message = "Check your inputs" });
+            }
+
+            var message = new Message()
+            {
+                Sender = model.Sender,
+                Recipient = model.Recipient,
+                Description = model.Description,
+                PropertyId = model.PropertyId,
+                Date = DateTime.UtcNow
+            };
+
+            this.db.Messages.Add(message);
+
+            this.db.SaveChanges();
+
+            return Ok(new Response { Status = "Success", Message = "Message sended successfully!" });
+        }
+
         
     }
 }
