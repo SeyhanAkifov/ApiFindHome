@@ -136,11 +136,19 @@ namespace ApiFindHome.Controllers
         }
 
         [HttpGet]
-        public object GetRecipientMessages(string recipient)
+        public object GetRecipientMessages(int conversationId)
         {
-            var messages = this.db.Messages.Where(x => x.Recipient == this.User.Identity.Name).ToList();
+            var messages = this.db.Messages.Where(x => x.ConversationId == conversationId).ToList();
 
             return messages;
+        }
+
+        [HttpGet]
+        public object GetConversations(string recipient)
+        {
+            var conversations = this.db.Conversations.Where(x => x.Recipient == recipient).ToList();
+
+            return conversations;
         }
 
         [HttpGet]
@@ -167,6 +175,21 @@ namespace ApiFindHome.Controllers
                 PropertyId = model.PropertyId,
                 Date = DateTime.UtcNow
             };
+
+            var conversation = this.db.Conversations.FirstOrDefault(x => x.Sender == model.Sender && x.Recipient == model.Recipient || x.Sender == model.Recipient && x.Recipient == model.Sender );
+
+            if (conversation == null)
+            {
+                conversation = new Conversation()
+                {
+                    Sender = model.Sender,
+                    Recipient = model.Recipient
+                };
+
+                this.db.Conversations.Add(conversation);
+            }
+
+            conversation.Messages.Add(message);
 
             this.db.Messages.Add(message);
 

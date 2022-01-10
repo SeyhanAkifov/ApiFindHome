@@ -19,5 +19,7 @@ namespace ApiFindHome.Model
         public DateTime Date { get; set; }
 
         public string Description { get; set; }
+
+        public int ConversationId { get; set; }
     }
 }

@@ -42,6 +42,8 @@ namespace ApiFindHome.Data
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Conversation> Conversations { get; set; }
+
 
 
 
@@ -50,7 +52,7 @@ namespace ApiFindHome.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("");
+                optionsBuilder.UseSqlServer("Server=mssql6.asphostbg.net,14330;Database=seyhanak_apifindhome;Uid=seyhanak_admin_seyhan;Password=DuduDudu157");
             }
         }
 
