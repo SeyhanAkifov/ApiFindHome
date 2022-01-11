@@ -146,7 +146,7 @@ namespace ApiFindHome.Controllers
         [HttpGet]
         public object GetConversations(string recipient)
         {
-            var conversations = this.db.Conversations.Where(x => x.Recipient == recipient).ToList();
+            var conversations = this.db.Conversations.Where(x => x.Recipient == recipient || x.Sender == recipient).ToList();
 
             return conversations;
         }

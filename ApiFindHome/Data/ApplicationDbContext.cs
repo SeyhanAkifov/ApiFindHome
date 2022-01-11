@@ -1,6 +1,7 @@
 ﻿using ApiFindHome.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,22 @@ namespace ApiFindHome.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+       
+
         public ApplicationDbContext()
         {
-
+           
         }
+
+        
 
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
 
         }
+
+        
 
 
         public DbSet<Property> Properties { get; set; }
@@ -52,7 +59,11 @@ namespace ApiFindHome.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("");
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("ConnStr"));
             }
         }
 
