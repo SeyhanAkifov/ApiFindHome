@@ -63,7 +63,7 @@ namespace ApiFindHome.Data
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.json")
             .Build();
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("ConnStr"));
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }
         }
 

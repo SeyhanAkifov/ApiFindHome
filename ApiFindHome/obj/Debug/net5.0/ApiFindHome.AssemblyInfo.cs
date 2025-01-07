@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiFindHome")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4fa012033a6ab3014a22e4812415a5c52c37ba8")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiFindHome")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiFindHome")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
