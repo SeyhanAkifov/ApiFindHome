@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiFindHome.Model
 {
-    public class Message
+    public class Message : Base
     {
-        [Key]
-        public int Id { get; set; }
+    
 
         public int PropertyId { get; set; }
 

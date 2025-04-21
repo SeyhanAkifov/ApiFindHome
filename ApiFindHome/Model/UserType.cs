@@ -2,10 +2,9 @@
 
 namespace ApiFindHome.Model
 {
-    public class UserType
+    public class UserType : Base
     {
-        [Key]
-        public int Id { get; set; }
+       
         [Required]
         public string Name { get; set; }
     }

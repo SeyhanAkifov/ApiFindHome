@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiFindHome.Model
 {
-    public class Feature
+    public class Feature : Base
     {
-        [Key]
-        public int Id { get; set; }
+       
         [Required]
         public bool AirConditioning { get; set; }
         [Required]

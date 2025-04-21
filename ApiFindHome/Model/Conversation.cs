@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiFindHome.Model
 {
-    public class Conversation
+    public class Conversation : Base
     {
 
         public Conversation()
@@ -14,8 +14,7 @@ namespace ApiFindHome.Model
             this.Messages = new HashSet<Message>();
         }
 
-        [Key]
-        public int Id { get; set; }
+      
 
         [Required]
         public string Sender { get; set; }

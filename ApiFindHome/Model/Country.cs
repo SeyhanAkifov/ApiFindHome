@@ -4,10 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace ApiFindHome.Model
 {
-    public class Country
+    public class Country : Base
     {
-        [Key]
-        public int Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
         [JsonIgnore]

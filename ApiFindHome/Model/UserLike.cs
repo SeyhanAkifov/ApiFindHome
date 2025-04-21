@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiFindHome.Model
 {
-    public class UserLike
+    public class UserLike : Base
     {
-        [Key]
-        public int Id { get; set; }
+      
 
         [Required]
         public string UserId { get; set; }

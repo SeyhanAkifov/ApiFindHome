@@ -31,7 +31,6 @@ namespace ApiFindHome.Controllers
 
         [EnableCors]
         [HttpGet]
-        
         public object Get(int page)
         {
             ICollection<Property> list = db.Properties
@@ -40,14 +39,14 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address)
                 .Include(x => x.Address.City)
                 .Include(x => x.Address.City.Country)
-                .Include(x => x.Type).OrderByDescending(x => x.AddedOn).Skip(page).Take(6).ToList();
-            
+                .Include(x => x.Type).Where(x => x.DeletedDateTime == null).OrderByDescending(x => x.AddedOn).Skip(page).Take(6).ToList();
+
             var result = mapper.Map<ICollection<Property>, ICollection<HomePagePropertyDto>>(list);
 
             return result;
         }
 
-        
+
         [HttpGet]
         public object GetCitiesWitProperties()
         {
@@ -57,7 +56,7 @@ namespace ApiFindHome.Controllers
                 .Include(x => x.Address.City.Country)
                 .Include(x => x.Type).ToList();
 
-            
+
             var cityList = db.Cities.ToList();
 
             var result = cityList.Select(x => new CitySearchDto
@@ -65,20 +64,17 @@ namespace ApiFindHome.Controllers
                 Id = x.Id,
                 City = x.Name,
                 Properties = list.Where(y => y.Address.City.Name == x.Name).Count(),
-                Size =  8 
-                
+                Size = 8
+
             }).OrderByDescending(x => x.Properties).Take(4).ToList();
 
             result.First().Size = 4;
             result.Last().Size = 4;
 
-           
-
             return result;
-
         }
 
-        
+
         [HttpGet]
         public object GetWithId(int id)
         {
@@ -133,7 +129,7 @@ namespace ApiFindHome.Controllers
             return types;
         }
 
-       
+
         [Authorize]
         [HttpGet]
         public object DeleteWithId(int id)
@@ -150,7 +146,7 @@ namespace ApiFindHome.Controllers
                 return NotFound(new Response { Status = "Not Found", Message = "Not found property with this id!" });
             }
 
-            db.Properties.Remove(property);
+            property.DeletedDateTime = DateTime.UtcNow;
             db.SaveChanges();
 
             return Ok(new Response { Status = "Success", Message = "Property deleted successfully!" });
@@ -160,6 +156,8 @@ namespace ApiFindHome.Controllers
         [HttpPost]
         public object Post([FromBody] PropertyInputModelDto model)
         {
+
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(new Response { Status = "Failed", Message = "Check your inputs" });
@@ -171,20 +169,33 @@ namespace ApiFindHome.Controllers
             var countryName = model.CountryName;
 
             var type = db.PropertyTypes.FirstOrDefault(x => x.Name == typeName);
+            if (type == null)
+            {
+                db.PropertyTypes.Add(new PropertyType { Name = typeName, CreatedDateTime = DateTime.UtcNow });
+                db.SaveChanges();
+                type = db.PropertyTypes.FirstOrDefault(x => x.Name == typeName);
+            }
+
             var adFor = db.AdFors.FirstOrDefault(x => x.Name == adfor);
+            if (adFor == null)
+            {
+                db.AdFors.Add(new AdFor { Name = adfor, CreatedDateTime = DateTime.UtcNow });
+                db.SaveChanges();
+                adFor = db.AdFors.FirstOrDefault(x => x.Name == adfor);
+            }
             var city = db.Cities.FirstOrDefault(x => x.Name == cityName);
             var country = db.Countries.FirstOrDefault(x => x.Name == countryName);
 
             if (city == null)
             {
-                db.Cities.Add(new City { Name = cityName , Country = new Country { Name = countryName} });
+                db.Cities.Add(new City { Name = cityName, Country = new Country { Name = countryName }, CreatedDateTime = DateTime.UtcNow });
                 db.SaveChanges();
                 city = db.Cities.FirstOrDefault(x => x.Name == cityName);
             }
 
             if (country == null)
             {
-                db.Countries.Add(new Country { Name = countryName });
+                db.Countries.Add(new Country { Name = countryName, CreatedDateTime = DateTime.UtcNow });
                 db.SaveChanges();
                 country = db.Countries.FirstOrDefault(x => x.Name == countryName);
             }
@@ -194,34 +205,21 @@ namespace ApiFindHome.Controllers
             var feature = new Feature
             {
                 AirConditioning = model.Feature.AirConditioning,
-
                 Barbeque = model.Feature.Barbeque,
-
                 Dryer = model.Feature.Dryer,
-
                 Gym = model.Feature.Gym,
-
                 Laundry = model.Feature.Laundry,
-
                 Lawn = model.Feature.Lawn,
-
                 Kitchen = model.Feature.Kitchen,
-
                 OutdoorShower = model.Feature.OutdoorShower,
-
                 Refrigerator = model.Feature.Refrigerator,
-
                 Sauna = model.Feature.Sauna,
-
                 SwimmingPool = model.Feature.SwimmingPool,
-
                 TvCable = model.Feature.TvCable,
-
                 Washer = model.Feature.Washer,
-
                 Wifi = model.Feature.Wifi,
-
-                WindowCoverings = model.Feature.WindowCoverings
+                WindowCoverings = model.Feature.WindowCoverings,
+                CreatedDateTime = DateTime.UtcNow
             };
 
             var property = new Property
@@ -243,15 +241,13 @@ namespace ApiFindHome.Controllers
                 Description = model.Description,
                 ImageUrl = model.ImageUrl,
                 Feature = feature,
-
+                CreatedDateTime = DateTime.UtcNow,
             };
 
             db.Properties.Add(property);
             db.SaveChanges();
 
             return Ok(new Response { Status = "Success", Message = "Property updated successfully!" });
-
-
         }
 
         [Authorize]
@@ -263,8 +259,7 @@ namespace ApiFindHome.Controllers
             {
                 return BadRequest(new Response { Status = "Failed", Message = "Check your inputs" });
             }
-
-
+            
             var id = model.Id;
 
             if (id <= 0)
@@ -291,14 +286,14 @@ namespace ApiFindHome.Controllers
 
             if (city == null)
             {
-                db.Cities.Add(new City { Name = cityName, Country = new Country { Name = countryName } });
+                db.Cities.Add(new City { Name = cityName, Country = new Country { Name = countryName, LastModifiedDateTime = DateTime.UtcNow }, LastModifiedDateTime = DateTime.UtcNow });
                 db.SaveChanges();
                 city = db.Cities.FirstOrDefault(x => x.Name == cityName);
             }
 
             if (country == null)
             {
-                db.Countries.Add(new Country { Name = countryName });
+                db.Countries.Add(new Country { Name = countryName, LastModifiedDateTime = DateTime.UtcNow });
                 db.SaveChanges();
                 country = db.Countries.FirstOrDefault(x => x.Name == countryName);
             }
@@ -308,41 +303,28 @@ namespace ApiFindHome.Controllers
             var feature = new Feature
             {
                 AirConditioning = model.Feature.AirConditioning,
-
                 Barbeque = model.Feature.Barbeque,
-
                 Dryer = model.Feature.Dryer,
-
                 Gym = model.Feature.Gym,
-
                 Laundry = model.Feature.Laundry,
-
                 Lawn = model.Feature.Lawn,
-
                 Kitchen = model.Feature.Kitchen,
-
                 OutdoorShower = model.Feature.OutdoorShower,
-
                 Refrigerator = model.Feature.Refrigerator,
-
                 Sauna = model.Feature.Sauna,
-
                 SwimmingPool = model.Feature.SwimmingPool,
-
                 TvCable = model.Feature.TvCable,
-
                 Washer = model.Feature.Washer,
-
                 Wifi = model.Feature.Wifi,
-
-                WindowCoverings = model.Feature.WindowCoverings
+                WindowCoverings = model.Feature.WindowCoverings,
+                LastModifiedDateTime = DateTime.UtcNow
             };
 
             prop.Type = type;
             prop.Price = model.Price;
             prop.AdFor = adFor;
             prop.Condition = model.Condition;
-            prop.Address = new Address { City = city, PostCode = model.PostCode, StreetName = model.Address.Split(" ")[0], StreetNumber = model.Address.Split(" ")[1] };
+            prop.Address = new Address { City = city, PostCode = model.PostCode, StreetName = model.Address.Split(" ")[0], StreetNumber = model.Address.Split(" ")[1], LastModifiedDateTime = DateTime.UtcNow };
             prop.Beds = model.Beds;
             prop.Baths = model.Baths;
             prop.Area = model.Area;
@@ -362,19 +344,16 @@ namespace ApiFindHome.Controllers
             }
             catch
             {
-                
+
             }
             
-
             return Ok(new Response { Status = "Success", Message = "Property created successfully!" });
-
-
         }
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> UserLike([FromBody] Like model)
-        {   
+        {
             var like = new UserLike
             {
                 UserId = model.Username,
@@ -382,7 +361,7 @@ namespace ApiFindHome.Controllers
             };
 
             db.UserLikes.Add(like);
-            
+
 
             await db.SaveChangesAsync();
 
@@ -406,8 +385,6 @@ namespace ApiFindHome.Controllers
         [HttpGet]
         public object GetMyLikes(string username)
         {
-           
-            
             var list = db.Properties
                  .Include(x => x.Address)
                  .Include(x => x.Address.City)

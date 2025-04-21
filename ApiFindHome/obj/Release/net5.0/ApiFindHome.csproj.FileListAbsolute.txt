@@ -131,3 +131,5 @@ G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Release\net5.0\ApiFindHome.dl
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Release\net5.0\ref\ApiFindHome.dll
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Release\net5.0\ApiFindHome.pdb
 G:\desktop\FindHomeApi\ApiFindHome\ApiFindHome\obj\Release\net5.0\ApiFindHome.genruntimeconfig.cache
+C:\Users\kabal\Documents\GitHub\ApiFindHome\ApiFindHome\obj\Release\net5.0\ApiFindHome.dll
+C:\Users\kabal\Documents\GitHub\ApiFindHome\ApiFindHome\obj\Release\net5.0\ApiFindHome.pdb

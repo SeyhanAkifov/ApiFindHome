@@ -4,45 +4,43 @@ using ApiFindHome.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
-#nullable disable
 
 namespace ApiFindHome.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250421190021_BaseClass")]
+    partial class BaseClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ApiFindHome.Model.AdFor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -58,26 +56,25 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PostCode")
@@ -181,33 +178,32 @@ namespace ApiFindHome.Migrations
 
                     b.HasIndex("UserTypeId");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("ApiFindHome.Model.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -225,23 +221,22 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Recipient")
@@ -261,23 +256,22 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -293,9 +287,8 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("AirConditioning")
                         .HasColumnType("bit");
@@ -303,13 +296,13 @@ namespace ApiFindHome.Migrations
                     b.Property<bool>("Barbeque")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Dryer")
@@ -321,10 +314,10 @@ namespace ApiFindHome.Migrations
                     b.Property<bool>("Kitchen")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Laundry")
@@ -366,32 +359,31 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PropertyId")
@@ -416,17 +408,16 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AdForId")
+                    b.Property<int?>("AdForId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<int>("Area")
@@ -442,24 +433,24 @@ namespace ApiFindHome.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FeatureId")
+                    b.Property<int?>("FeatureId")
                         .HasColumnType("int");
 
                     b.Property<int>("Floor")
@@ -472,10 +463,10 @@ namespace ApiFindHome.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
@@ -485,7 +476,7 @@ namespace ApiFindHome.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeId")
+                    b.Property<int?>("TypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("YearOfConstruction")
@@ -508,23 +499,22 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -540,23 +530,22 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PropertyId")
@@ -577,23 +566,22 @@ namespace ApiFindHome.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
+                    b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedDateTime")
+                    b.Property<DateTime>("DeletedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("LastModifiedDateTime")
+                    b.Property<DateTime>("LastModifiedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -629,16 +617,15 @@ namespace ApiFindHome.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -654,16 +641,15 @@ namespace ApiFindHome.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -679,7 +665,7 @@ namespace ApiFindHome.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -701,7 +687,7 @@ namespace ApiFindHome.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -716,7 +702,7 @@ namespace ApiFindHome.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -735,7 +721,7 @@ namespace ApiFindHome.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("ApiFindHome.Model.Address", b =>
@@ -796,31 +782,23 @@ namespace ApiFindHome.Migrations
                 {
                     b.HasOne("ApiFindHome.Model.AdFor", "AdFor")
                         .WithMany()
-                        .HasForeignKey("AdForId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AdForId");
 
                     b.HasOne("ApiFindHome.Model.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("ApiFindHome.Model.Feature", "Feature")
                         .WithMany()
-                        .HasForeignKey("FeatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FeatureId");
 
                     b.HasOne("ApiFindHome.Model.PropertyType", "Type")
                         .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AdFor");
+                        .HasForeignKey("TypeId");
 
                     b.Navigation("Address");
+
+                    b.Navigation("AdFor");
 
                     b.Navigation("Feature");
 

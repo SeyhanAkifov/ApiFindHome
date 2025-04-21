@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiFindHome.Model
 {
-    public class Property
+    public class Property : Base
     {
-        [Key]
-        public int Id { get; set; }
+       
         [Required]
         public PropertyType Type { get; set; }
         [Required]
