@@ -67,9 +67,12 @@ namespace ApiFindHome.Controllers
                 Size = 8
 
             }).OrderByDescending(x => x.Properties).Take(4).ToList();
-
-            result.First().Size = 4;
-            result.Last().Size = 4;
+            if(result.Count > 0)
+            {
+                result.First().Size = 4;
+                result.Last().Size = 4;
+            }
+            
 
             return result;
         }
